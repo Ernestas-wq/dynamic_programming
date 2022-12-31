@@ -16,16 +16,9 @@ const allConstruct = (target, wordBank, memo = {}) => {
     if (target.indexOf(word) === 0) {
       const suffix = target.slice(word.length)
       const suffixWays = allConstruct(suffix, wordBank, memo)
-      if (suffixWays.length) {
-        for (let way of suffixWays) {
-          if (memo[target]) {
-            memo[target].push([word, ...way])
-          } else {
-            memo[target] = [[word, ...way]]
-          }
-          result = [...result, [word, ...way]]
-        }
-      }
+      const targetWays = suffixWays.map((way) => [word, ...way])
+      memo[target] = targetWays
+      result = [...result, ...targetWays]
     }
   }
   memo[target] = result
