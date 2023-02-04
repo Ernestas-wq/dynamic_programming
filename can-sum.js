@@ -28,3 +28,23 @@ console.log(canSum(7, [5, 3, 4, 7])) // true
 console.log(canSum(7, [2, 4])) // false
 console.log(canSum(8, [2, 3, 5])) // true
 console.log(canSum(300, [7, 14])) // false
+
+const canSumTabulated = (targetSum, nums) => {
+  const table = Array(targetSum + 1).fill(false)
+  table[0] = true
+
+  for (let i = 0; i < table.length; i++) {
+    for (let num of nums) {
+      if (i + num < table.length && table[i]) {
+        table[num + i] = true
+      }
+    }
+  }
+
+  return table[table.length - 1]
+}
+console.log(canSumTabulated(7, [2, 3])) // true
+console.log(canSumTabulated(7, [5, 3, 4, 7])) // true
+console.log(canSumTabulated(7, [2, 4])) // false
+console.log(canSumTabulated(8, [2, 3, 5])) // true
+console.log(canSumTabulated(300, [7, 14])) // false
