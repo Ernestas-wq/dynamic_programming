@@ -33,15 +33,13 @@ const canSumTabulated = (targetSum, nums) => {
   const table = Array(targetSum + 1).fill(false)
   table[0] = true
 
-  for (let i = 0; i < table.length; i++) {
+  for (let i = 0; i <= targetSum; i++) {
     for (let num of nums) {
-      if (i + num < table.length && table[i]) {
-        table[num + i] = true
-      }
+      table[num + i] = true
     }
   }
 
-  return table[table.length - 1]
+  return table[targetSum]
 }
 console.log(canSumTabulated(7, [2, 3])) // true
 console.log(canSumTabulated(7, [5, 3, 4, 7])) // true

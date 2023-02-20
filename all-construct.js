@@ -42,3 +42,38 @@ console.log(
     "aaaaa",
   ])
 )
+// time complexity O(n^m) space O(n^m)
+const allConstructTabulated = (target, wordBank) => {
+  const table = Array(target.length + 1)
+    .fill()
+    .map(() => [])
+
+  table[0] = [[]]
+
+  for (let i = 0; i <= target.length; i++) {
+    for (const word of wordBank) {
+      if (target.slice(i, i + word.length) === word) {
+        const combos = table[i].map((combo) => [...combo, word])
+        table[i + word.length].push(...combos)
+      }
+    }
+  }
+  return table[target.length]
+}
+
+console.log(allConstructTabulated("purple", ["purp", "p", "ur", "le", "purpl"]))
+console.log(
+  allConstructTabulated("abcdef", ["ab", "abc", "cd", "def", "abcd", "ef", "c"])
+)
+
+console.log(
+  allConstructTabulated("skateboard", [
+    "bo",
+    "rd",
+    "ate",
+    "t",
+    "ska",
+    "sk",
+    "boar",
+  ])
+)
